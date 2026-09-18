@@ -6,6 +6,168 @@ import streamlit as st
 import pandas as pd
 from pathlib import Path
 
+import streamlit as st
+
+st.markdown("""
+<style>
+
+    /* 全局背景保持不变 */
+    .stApp {
+        background-color: #f0f6ff;
+        background-image:
+            radial-gradient(circle at 10% 15%, rgba(255, 182, 193, 0.35) 0 80px, transparent 81px),
+            radial-gradient(circle at 85% 20%, rgba(180, 210, 255, 0.45) 0 110px, transparent 111px),
+            radial-gradient(circle at 75% 85%, rgba(255, 222, 190, 0.35) 0 90px, transparent 91px),
+            radial-gradient(circle at 20% 80%, rgba(200, 230, 255, 0.5) 0 100px, transparent 101px),
+            linear-gradient(180deg, #f7fbff 0%, #eaf4ff 100%);
+        background-attachment: fixed;
+    }
+
+    /* 可爱装饰保持不变 */
+    .stApp::before {
+        
+        position: fixed;
+        top: 20px;
+        right: 25px;
+        font-size: 28px;
+        letter-spacing: 18px;
+        opacity: 0.55;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .stApp::after {
+        
+        position: fixed;
+        bottom: 30px;
+        left: 20px;
+        font-size: 24px;
+        letter-spacing: 14px;
+        opacity: 0.45;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    /* 正文加深 */
+    p,
+    .stMarkdown,
+    .stText,
+    .stWrite {
+        color: #111111 !important;
+        line-height: 1.7;
+    }
+
+    /* 主标题加深 */
+    h1 {
+        color: #0b1e3f !important;
+        font-weight: 800;
+        letter-spacing: 0.5px;
+    }
+
+    /* 二级标题加深 */
+    h2 {
+        color: #0b1e3f !important;
+        font-weight: 700;
+        border-left: 5px solid #6fa8dc;
+        padding-left: 12px;
+        background: rgba(255, 255, 255, 0.85);
+        padding-top: 8px;
+        padding-bottom: 8px;
+        padding-right: 12px;
+        border-radius: 10px;
+    }
+
+    /* 三级标题加深：基本信息、板块导航 */
+    h3 {
+        color: #0b1e3f !important;
+        font-weight: 700;
+    }
+
+    /* 卡片保持不变 */
+    div[data-testid="stContainer"] {
+        background: rgba(255, 255, 255, 0.88);
+        border-radius: 22px;
+        padding: 24px;
+        box-shadow:
+            0 4px 14px rgba(111, 168, 220, 0.25),
+            0 1px 3px rgba(0, 0, 0, 0.08);
+        margin-bottom: 20px;
+        border: 1px solid rgba(180, 210, 255, 0.5);
+        position: relative;
+        z-index: 1;
+    }
+
+    div[data-testid="stContainer"]::before {
+        content: "🎀";
+        position: absolute;
+        top: 10px;
+        right: 14px;
+        font-size: 20px;
+        opacity: 0.5;
+    }
+
+    /* 大数字加深 */
+    [data-testid="stMetricValue"] {
+        color: #0b1e3f !important;
+        font-weight: 800;
+    }
+
+    [data-testid="stMetricLabel"] {
+        color: #1a2b48 !important;
+        font-weight: 600;
+    }
+
+    /* 表格加深 */
+    table {
+        color: #111111;
+    }
+
+    th {
+        color: #0b1e3f;
+        background: rgba(180, 210, 255, 0.4);
+        font-weight: 700;
+    }
+
+    td {
+        color: #111111;
+    }
+
+    /* 左侧栏加深 */
+    [data-testid="stSidebar"] {
+        background-color: #d7e8ff !important;
+    }
+
+    [data-testid="stSidebar"] .stMarkdown,
+    [data-testid="stSidebar"] p,
+    [data-testid="stSidebar"] span {
+        color: #111111 !important;
+    }
+
+    [data-testid="stSidebar"] h1,
+    [data-testid="stSidebar"] h2,
+    [data-testid="stSidebar"] h3 {
+        color: #0b1e3f !important;
+        font-weight: 700;
+    }
+
+    /* 粉色按钮保留，但文字加深 */
+    .stButton > button {
+        border-radius: 24px;
+        background-color: #ff9ec7;
+        color: #3b1228 !important;
+        font-weight: 700;
+        border: none;
+        padding: 8px 22px;
+        box-shadow: 0 3px 8px rgba(255, 158, 199, 0.4);
+    }
+
+    .stButton > button:hover {
+        background-color: #ff7ab0;
+    }
+
+</style>
+""", unsafe_allow_html=True)
+
 st.set_page_config(
     page_title="张佳琳 · 个人简历",
     page_icon="📄",
