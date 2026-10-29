@@ -181,7 +181,7 @@ COLUMNS = ["id", "title", "category", "notes", "created_at"]
 
 PROFILE = {
     "name": "张佳琳",
-    "intent": "数据分析助理实习生",
+    "intent": "实习生",
     "birth": "2006.12",
     "gender": "女",
     "degree": "大学本科",
