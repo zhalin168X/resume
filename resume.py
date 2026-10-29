@@ -11,7 +11,6 @@ import streamlit as st
 st.markdown("""
 <style>
 
-    /* 全局背景保持不变 */
     .stApp {
         background-color: #f0f6ff;
         background-image:
@@ -23,7 +22,6 @@ st.markdown("""
         background-attachment: fixed;
     }
 
-    /* 可爱装饰保持不变 */
     .stApp::before {
         
         position: fixed;
@@ -83,7 +81,6 @@ st.markdown("""
         font-weight: 700;
     }
 
-    /* 卡片保持不变 */
     div[data-testid="stContainer"] {
         background: rgba(255, 255, 255, 0.88);
         border-radius: 22px;
@@ -184,6 +181,7 @@ COLUMNS = ["id", "title", "category", "notes", "created_at"]
 
 PROFILE = {
     "name": "张佳琳",
+    "intent": "数据分析助理实习生",
     "birth": "2006.12",
     "gender": "女",
     "degree": "大学本科",
@@ -197,7 +195,7 @@ EDUCATION = {
     "school": "上海财经大学",
     "major": "信息管理与信息系统（本科）",
     "period": "2025.08 - 至今",
-    "gpa": "大一上 GPA 3.40，专业排名前 15%；大一下 GPA 3.56，专业排名前 19%",
+    "gpa": "学业成绩：大一综测专业排名第八；大一上 GPA 3.40（专业前 15%），大一下 GPA 3.56（专业前 19%）",
     "core_courses": [
         ("程序设计基础", 3.7),
         ("高级程序设计与实验", 3.7),
@@ -212,8 +210,9 @@ EXPERIENCES = [
         "org": "院文艺部",
         "role": "部长",
         "points": [
-            "独立撰写学院选课指南宣传推文，整理选课重点、流程说明与注意事项，输出结构化科普内容。",
-            "制作宣传内容并通过宣讲形式系统化输出部门信息，完成部门招新落地。",
+            "**大赛统筹**：作为上海财经大学“金翼杯”校园文化艺术大赛负责人（10-11月），统筹短剧大赛与视频大赛整体组织与赛程安排，涵盖活动推送、成员招募、剧本撰写、物料采购、彩排等多个环节。",
+            "**内容产出与资料沉淀**：独立撰写学院选课指南宣传推文，整理选课重点、流程说明与注意事项，输出结构化科普内容。",
+            "**信息输出与沟通表达**：制作宣传内容并通过宣讲形式系统化输出部门信息，完成部门招新落地。",
         ],
     },
     {
@@ -221,15 +220,15 @@ EXPERIENCES = [
         "org": "院文艺部",
         "role": "部员",
         "points": [
-            "协助策划蓝园杯、学院迎新晚会等大型文艺活动，参与方案设计、流程彩排与现场调度，单场活动覆盖数百名师生。",
-            "联动部门成员完成多场文体活动筹备，协调分工对接各方，锻炼高效沟通与任务推进能力。",
+            "**活动策划落地**：协助策划蓝园杯、学院迎新晚会等大型文艺活动，参与方案设计、流程彩排与现场调度，保障活动顺利落地。",
+            "**跨团队沟通**：协调多场文体活动筹备分工，锻炼沟通与推进能力。",
         ],
     },
 ]
 
 AWARDS = [
     {
-        "name": "上财“财青杯”本科招生宣传征文大赛 三等奖",
+        "name": "上财“财菁杯”本科招生宣传征文大赛 三等奖",
         "desc": "梳理整合招生相关素材，提炼关键信息，输出逻辑清晰的书面文稿，锻炼信息归纳能力。",
     },
 ]
@@ -246,7 +245,7 @@ VOLUNTEER = [
 
 SELF_EVAL = (
     "信息管理与信息系统专业大二本科生，学业成绩稳步提升，拥有学生团队管理与大型文艺活动执行经验。"
-    "做事踏实细致，学习能力强。暂无实习经历，希望在实习岗位中将专业知识应用到实际工作，认真完成分配的各项任务。"
+    "做事踏实细致，学习能力强。希望在实习岗位中将专业知识应用到实际工作，认真完成分配的各项任务。"
 )
 
 # 六个板块（已删除「技能自评」）
@@ -353,6 +352,7 @@ def render_profile():
         st.write(f"**专业：** {PROFILE['major']}")
         st.write(f"**籍贯：** {PROFILE['hometown']}")
     with col3:
+        st.write(f"**求职意向：** {PROFILE['intent']}")
         st.write(f"**电话：** {PROFILE['phone']}")
         st.write(f"**邮箱：** {PROFILE['email']}")
 
@@ -410,6 +410,7 @@ def render_download():
 姓名：{PROFILE['name']}    性别：{PROFILE['gender']}    出生年月：{PROFILE['birth']}
 学历：{PROFILE['degree']}    专业：{PROFILE['major']}    籍贯：{PROFILE['hometown']}
 电话：{PROFILE['phone']}    邮箱：{PROFILE['email']}
+求职意向：{PROFILE['intent']}
 
 【教育背景】
 {EDUCATION['school']} · {EDUCATION['major']} · {EDUCATION['period']}
@@ -420,23 +421,23 @@ def render_download():
 【校园实践经历】
 """
     for exp in EXPERIENCES:
-        text += f"\\n{exp['period']} · {exp['org']} · {exp['role']}\\n"
+        text += f"\n{exp['period']} · {exp['org']} · {exp['role']}\n"
         for p in exp["points"]:
-            text += f"  - {p}\\n"
+            text += f"  - {p.replace('**', '')}\n"
 
-    text += "\\n【竞赛与荣誉】\\n"
+    text += "\n【竞赛与荣誉】\n"
     for a in AWARDS:
-        text += f"- {a['name']}：{a['desc']}\\n"
+        text += f"- {a['name']}：{a['desc']}\n"
 
-    text += "\\n【技能证书】\\n"
+    text += "\n【技能证书】\n"
     for name, detail in CERTS:
-        text += f"- {name}：{detail}\\n"
+        text += f"- {name}：{detail}\n"
 
-    text += "\\n【志愿服务】\\n"
+    text += "\n【志愿服务】\n"
     for org, role, desc in VOLUNTEER:
-        text += f"- {org} · {role}：{desc}\\n"
+        text += f"- {org} · {role}：{desc}\n"
 
-    text += f"\\n【自我评价】\\n{SELF_EVAL}\\n"
+    text += f"\n【自我评价】\n{SELF_EVAL}\n"
 
     st.download_button(
         label="📥 下载 TXT 版简历",
